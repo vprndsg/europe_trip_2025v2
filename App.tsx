@@ -153,9 +153,9 @@ function buildRouteLines(itin: Itinerary): [number, number][][] {
           lastPos = end;
         } else if (from) {
           lastPos = from.position;
-
+        }
        }
-    });
+   });
   });
   return lines;
 }
