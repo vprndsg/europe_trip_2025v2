@@ -1,12 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Europe Trip 2025 Itinerary</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trip Itinerary Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""></script>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif; /* A nice sans-serif font */
+      }
+      /* Custom scrollbar for better aesthetics */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+      .leaflet-container {
+        height: 400px;
+        width: 100%;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai?bundle",
+    "marked": "https://esm.sh/marked@^13.0.2",
+    "utils": "/utils.ts",
+    "app": "/App.tsx",
+    "types": "/types.ts",
+    "itineraryParser": "/services/itineraryParser.ts",
+    "header": "/components/Header.tsx",
+    "footer": "/components/Footer.tsx",
+    "itinerarydaycard": "/components/ItineraryDayCard.tsx",
+    "activityitem": "/components/ActivityItem.tsx",
+    "travelsegmentitem": "/components/TravelSegmentItem.tsx",
+    "accommodationitem": "/components/AccommodationItem.tsx",
+    "generaleventitem": "/components/GeneralEventItem.tsx",
+    "iconcomponents": "/components/IconComponents.tsx",
+    "interactivemap": "/components/InteractiveMap.tsx"
+  }
+}
+</script>
 </head>
-<body>
-  <h1>Europe Trip 2025 - Itinerary App</h1>
-  <p>Welcome! This GitHub Pages site will host the itinerary app for our Europe trip.</p>
-</body>
-</html>
+  <body class="bg-slate-100">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html><link rel="stylesheet" href="index.css">
+<script src="index.tsx" type="module"></script>

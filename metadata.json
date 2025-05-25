@@ -1,0 +1,7 @@
+{
+  "name": "Trip Itinerary Planner",
+  "description": "A web application to display a detailed travel itinerary, helping users keep track of their plans including travel, accommodation, and activities.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
