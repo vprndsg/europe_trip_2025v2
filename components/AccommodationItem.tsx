@@ -1,20 +1,30 @@
 import React from 'react';
 import { Accommodation } from '../types';
-import { BedIcon, ClockIcon, MapPinIcon, MapPinIconAlt, InformationCircleIcon } from './IconComponents';
+import { BedIcon, ClockIcon, MapPinIconAlt, InformationCircleIcon } from './IconComponents';
 import { createGoogleMapsSearchLink } from '../utils';
+import { findLocationId } from '../mapLocations';
 
 interface AccommodationItemProps {
   accommodation: Accommodation;
   time?: string;
   mainLocation?: string;
+  onSelectLocation?: (id: string) => void;
+  selectedLocationId?: string;
 }
 
-const AccommodationItem: React.FC<AccommodationItemProps> = ({ accommodation, time, mainLocation }) => {
+const AccommodationItem: React.FC<AccommodationItemProps> = ({ accommodation, time, mainLocation, onSelectLocation, selectedLocationId }) => {
   const canLinkName = accommodation.name && !accommodation.name.toLowerCase().includes("airbnb");
   const nameQuery = mainLocation && canLinkName ? `${accommodation.name}, ${mainLocation}` : accommodation.name;
+  const locationId = findLocationId(accommodation.address || nameQuery);
+  const isSelected = selectedLocationId && locationId === selectedLocationId;
 
   return (
-    <div className="bg-slate-700/50 p-4 rounded-lg shadow-md border-l-4 border-indigo-500">
+    <div
+      className={`bg-slate-700/50 p-4 rounded-lg shadow-md border-l-4 border-indigo-500 ${isSelected ? 'ring-2 ring-indigo-400' : ''}`}
+      onClick={() => locationId && onSelectLocation?.(locationId)}
+      role={locationId ? 'button' : undefined}
+      tabIndex={locationId ? 0 : -1}
+    >
       <div className="flex items-start">
         <BedIcon className="w-6 h-6 text-indigo-400 mr-3 mt-1 flex-shrink-0" />
         <div>
