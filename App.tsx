@@ -170,7 +170,7 @@ const App: React.FC = () => {
         </div>
 
         {showMap && (
-          <div className="mb-8 p-4 bg-slate-800 rounded-lg shadow-xl">
+          <div className="mb-8 p-4 bg-slate-800 rounded-lg shadow-xl sticky top-20 z-40">
             <InteractiveMap markers={mapLocations} selectedLocationId={selectedLocationId} />
           </div>
         )}
