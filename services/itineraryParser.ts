@@ -42,8 +42,10 @@ export function parseItinerary(text: string): Itinerary {
   const trainTransferPlatformRegex = /^Train: From your arrival platform.*?Platform\s*(\w+)\. Board.*? (IR .*?|IC \d+ toward .*?), open seating/i;
   const busTransferRegex = /^Bus: Exit the train.*?Stop\s*(\w+)\.\s*(Panorama-express BP \d+ toward .*?)(?:\s*\(mandatory free seat reservation.*?\))?/i;
   const reservationNoRegex = /^Reservation No.: (.*)/i;
-  
+
   const privateTaxiRegex = /^Private Taxi Transfer: (.*?) → (.*)/i;
+  const uberFromRegex = /^Uber from (.*?) to (.*)/i;
+  const uberToRegex = /^Uber to (.*)/i;
   const pickupAddressRegex = /^Pickup Address: (.*)/i;
   const pickupTimeRegex = /^Pickup Time: (.*)/i;
   const driverContactRegex = /^Driver Contact: (.*)/i;
@@ -311,6 +313,12 @@ export function parseItinerary(text: string): Itinerary {
             k++;
         }
         consumedLines += (k - (i+1));
+    } else if (line.match(uberFromRegex)) {
+        const match = line.match(uberFromRegex)!;
+        event = { type: EventType.TRAVEL, travelSegment: { mode: 'taxi', details: `Uber from ${match[1]} to ${match[2]}`, from: match[1], to: match[2], notes: [] }};
+    } else if (line.match(uberToRegex)) {
+        const match = line.match(uberToRegex)!;
+        event = { type: EventType.TRAVEL, travelSegment: { mode: 'taxi', details: `Uber to ${match[1]}`, to: match[1], notes: [] }};
     } else if (line.match(flightDepartureRegex)) {
         const match = line.match(flightDepartureRegex)!;
         event = { type: EventType.TRAVEL, time: match[3], travelSegment: { mode: 'flight', details: `Flight ${match[1]} from ${match[2]}`, operator: match[1].split(" ")[0], from: match[2], departureTime: match[3], notes: [] }};
