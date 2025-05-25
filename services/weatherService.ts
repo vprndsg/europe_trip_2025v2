@@ -40,16 +40,31 @@ function describeWeather(code: number): string {
   return weatherCodeDescriptions[code] || 'N/A';
 }
 
+// Fallback coordinates for locations that the geocoding API sometimes fails to
+// resolve.  Keys should match the `mainLocation` strings produced by the
+// itinerary parser.
+const fallbackCoords: Record<string, { latitude: number; longitude: number }> = {
+  'Lake Como, Italy': { latitude: 46.017, longitude: 9.233 } // Menaggio
+};
+
 export async function fetchForecast(location: string): Promise<ForecastDay[]> {
   // Fetch coordinates for the location
+  let latitude: number | undefined;
+  let longitude: number | undefined;
+
   const geoRes = await fetch(
     `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(location)}&count=1&language=en&format=json`
   );
   const geoData = await geoRes.json();
-  if (!geoData.results || geoData.results.length === 0) {
+  if (geoData.results && geoData.results.length > 0) {
+    ({ latitude, longitude } = geoData.results[0]);
+  } else if (fallbackCoords[location]) {
+    ({ latitude, longitude } = fallbackCoords[location]);
+  }
+
+  if (latitude === undefined || longitude === undefined) {
     throw new Error('Location not found');
   }
-  const { latitude, longitude } = geoData.results[0];
 
   // Determine date range for the next three days
   const now = new Date();
