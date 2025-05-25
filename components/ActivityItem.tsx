@@ -3,20 +3,26 @@ import { Activity } from '../types';
 import { HikeIcon, SparklesIcon, ClockIcon, ArrowUpTrayIcon, ArrowDownTrayIcon, AdjustmentsHorizontalIcon, InformationCircleIcon, MapPinIcon } from './IconComponents';
 import { createGoogleMapsSearchLink } from '../utils';
 
+import { findLocationId } from '../mapLocations';
+
 interface ActivityItemProps {
   activity: Activity;
   time?: string;
+  onSelectLocation?: (id: string) => void;
+  selectedLocationId?: string;
 }
 
-const ActivityItem: React.FC<ActivityItemProps> = ({ activity, time }) => {
+const ActivityItem: React.FC<ActivityItemProps> = ({ activity, time, onSelectLocation, selectedLocationId }) => {
   const isHike = activity.title.toLowerCase().includes('hike') || activity.difficulty || activity.distance || activity.elevationGain;
 
   let mapQuery: string | null = null;
   let mapLabel: string | null = null;
+  let locationId: string | undefined;
 
   if (activity.location) {
     mapQuery = activity.location;
     mapLabel = activity.location;
+    locationId = findLocationId(activity.location);
   } else if (activity.title) {
     let tempQuery = activity.title;
     if (tempQuery.startsWith("Hike: ")) tempQuery = tempQuery.substring(6);
@@ -42,11 +48,19 @@ const ActivityItem: React.FC<ActivityItemProps> = ({ activity, time }) => {
         mapQuery = potentialQuery;
         mapLabel = potentialQuery;
     }
+    locationId = findLocationId(potentialQuery);
   }
 
 
+  const isSelected = selectedLocationId && locationId === selectedLocationId;
+
   return (
-    <div className="bg-slate-700/50 p-4 rounded-lg shadow-md border-l-4 border-emerald-500">
+    <div
+      className={`bg-slate-700/50 p-4 rounded-lg shadow-md border-l-4 border-emerald-500 ${isSelected ? 'ring-2 ring-emerald-400' : ''}`}
+      onClick={() => locationId && onSelectLocation?.(locationId)}
+      role={locationId ? 'button' : undefined}
+      tabIndex={locationId ? 0 : -1}
+    >
       <div className="flex items-start">
         {isHike ? <HikeIcon className="w-6 h-6 text-emerald-400 mr-3 mt-1 flex-shrink-0" /> : <SparklesIcon className="w-6 h-6 text-emerald-400 mr-3 mt-1 flex-shrink-0" />}
         <div>

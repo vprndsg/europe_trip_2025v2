@@ -6,6 +6,7 @@ import ItineraryDayCard from './components/ItineraryDayCard';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import InteractiveMap from './components/InteractiveMap';
+import { mapLocations } from './mapLocations';
 import { LoadingSpinnerIcon, MapIcon, EyeIcon, EyeSlashIcon } from './components/IconComponents';
 
 const rawItineraryData = `
@@ -130,6 +131,7 @@ const App: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [showMap, setShowMap] = useState<boolean>(false);
+  const [selectedLocationId, setSelectedLocationId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     try {
@@ -145,6 +147,11 @@ const App: React.FC = () => {
       setIsLoading(false);
     }
   }, []);
+
+  const handleSelectLocation = (id: string) => {
+    setSelectedLocationId(id);
+    if (!showMap) setShowMap(true);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-700 text-slate-100 flex flex-col">
@@ -164,7 +171,7 @@ const App: React.FC = () => {
 
         {showMap && (
           <div className="mb-8 p-4 bg-slate-800 rounded-lg shadow-xl">
-            <InteractiveMap />
+            <InteractiveMap markers={mapLocations} selectedLocationId={selectedLocationId} />
           </div>
         )}
 
@@ -183,7 +190,7 @@ const App: React.FC = () => {
         {itinerary && !isLoading && !error && (
           <div className="space-y-8">
             {itinerary.days.map((day: ItineraryDayType) => (
-              <ItineraryDayCard key={day.id} day={day} />
+              <ItineraryDayCard key={day.id} day={day} onSelectLocation={handleSelectLocation} selectedLocationId={selectedLocationId} />
             ))}
           </div>
         )}
@@ -194,3 +201,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+

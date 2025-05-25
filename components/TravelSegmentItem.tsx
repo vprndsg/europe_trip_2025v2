@@ -2,13 +2,16 @@ import React from 'react';
 import { TravelSegment } from '../types';
 import { FlightIcon, TrainIcon, BusIcon, WalkIcon, CarIcon, ClockIcon, InformationCircleIcon, TicketIcon, BuildingLibraryIcon, MapPinIcon } from './IconComponents';
 import { createGoogleMapsSearchLink } from '../utils';
+import { findLocationId } from '../mapLocations';
 
 interface TravelSegmentItemProps {
   segment: TravelSegment;
-  time?: string; 
+  time?: string;
+  onSelectLocation?: (id: string) => void;
+  selectedLocationId?: string;
 }
 
-const TravelSegmentItem: React.FC<TravelSegmentItemProps> = ({ segment, time }) => {
+const TravelSegmentItem: React.FC<TravelSegmentItemProps> = ({ segment, time, onSelectLocation, selectedLocationId }) => {
   const getIcon = () => {
     switch (segment.mode) {
       case 'flight': return <FlightIcon className="w-6 h-6 text-blue-400 mr-3 mt-1 flex-shrink-0" />;
@@ -33,6 +36,9 @@ const TravelSegmentItem: React.FC<TravelSegmentItemProps> = ({ segment, time }) 
     }
   }
 
+  const locationId = findLocationId(segment.to) || findLocationId(segment.from) || findLocationId(segment.details);
+  const isSelected = selectedLocationId && locationId === selectedLocationId;
+
   const LocationLink: React.FC<{location?: string; label: string}> = ({ location, label }) => {
     if (!location) return null;
     // Basic check for what might be an address vs a station/city name for slightly different styling or query
@@ -54,7 +60,12 @@ const TravelSegmentItem: React.FC<TravelSegmentItemProps> = ({ segment, time }) 
 
 
   return (
-    <div className={`bg-slate-700/50 p-4 rounded-lg shadow-md border-l-4 ${getBorderColor()}`}>
+    <div
+      className={`bg-slate-700/50 p-4 rounded-lg shadow-md border-l-4 ${getBorderColor()} ${isSelected ? 'ring-2 ring-sky-400' : ''}`}
+      onClick={() => locationId && onSelectLocation?.(locationId)}
+      role={locationId ? 'button' : undefined}
+      tabIndex={locationId ? 0 : -1}
+    >
       <div className="flex items-start">
         {getIcon()}
         <div>
