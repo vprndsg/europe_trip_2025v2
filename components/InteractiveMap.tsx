@@ -8,14 +8,16 @@ declare var L: any;
 
 interface InteractiveMapProps {
   markers?: MapLocation[];
+  lines?: [number, number][][];
   selectedLocationId?: string;
 }
 
-const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], selectedLocationId }) => {
+const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], lines = [], selectedLocationId }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null); // To store Leaflet map instance
   const userMarkerRef = useRef<any>(null); // To store user's location marker
   const markerMapRef = useRef<Record<string, any>>({});
+  const polylineRefs = useRef<any[]>([]);
   
   const [currentPosition, setCurrentPosition] = useState<[number, number] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -80,6 +82,20 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], selectedL
       markerMapRef.current[loc.id] = marker;
     });
 
+    // Add provided lines
+    lines.forEach(path => {
+      const poly = L.polyline(path, { color: '#38BDF8', weight: 4, opacity: 0.7 }).addTo(map);
+      polylineRefs.current.push(poly);
+    });
+
+    // Fit map to markers and lines
+    const bounds = L.latLngBounds([]);
+    markers.forEach(loc => bounds.extend(loc.position));
+    lines.forEach(path => path.forEach(p => bounds.extend(p)));
+    if (bounds.isValid()) {
+      map.fitBounds(bounds.pad(0.2));
+    }
+
     // Geolocation
     if (navigator.geolocation) {
       const watchId = navigator.geolocation.watchPosition(
@@ -120,6 +136,8 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], selectedL
       return () => {
         navigator.geolocation.clearWatch(watchId);
         if (mapInstanceRef.current) {
+          polylineRefs.current.forEach(l => l.remove());
+          polylineRefs.current = [];
           mapInstanceRef.current.remove();
           mapInstanceRef.current = null;
         }
@@ -129,6 +147,24 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], selectedL
       setIsLocating(false);
     }
   }, []); // Empty dependency array ensures this runs once on mount
+
+  useEffect(() => {
+    if (!mapInstanceRef.current) return;
+    polylineRefs.current.forEach(l => l.remove());
+    polylineRefs.current = [];
+    lines.forEach(path => {
+      const poly = L.polyline(path, { color: '#38BDF8', weight: 4, opacity: 0.7 }).addTo(mapInstanceRef.current);
+      polylineRefs.current.push(poly);
+    });
+    if (lines.length > 0) {
+      const bounds = L.latLngBounds([]);
+      lines.forEach(path => path.forEach(p => bounds.extend(p)));
+      Object.values(markerMapRef.current).forEach((m: any) => bounds.extend(m.getLatLng()));
+      if (bounds.isValid()) {
+        mapInstanceRef.current.fitBounds(bounds.pad(0.2));
+      }
+    }
+  }, [lines]);
 
   useEffect(() => {
     if (!mapInstanceRef.current || !selectedLocationId) return;
