@@ -6,7 +6,7 @@ import ItineraryDayCard from './components/ItineraryDayCard';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import InteractiveMap from './components/InteractiveMap';
-import { LoadingSpinnerIcon, MapIcon, EyeIcon, EyeSlashIcon } from './components/IconComponents';
+import { LoadingSpinnerIcon, EyeIcon, EyeSlashIcon } from './components/IconComponents';
 
 const rawItineraryData = `
 Day 1-2 fly to Berlin (June 14-15)
