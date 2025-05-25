@@ -12,18 +12,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "@google/genai": "latest",
-    "marked": "^13.0.2",
-    "utils": "latest",
-    "app": "latest",
-    "types": "latest",
-    "itineraryParser": "latest",
-    "header": "latest",
-    "footer": "latest",
-    "itinerarydaycard": "latest",
-    "travelsegmentitem": "latest",
-    "generaleventitem": "latest",
-    "iconcomponents": "latest",
-    "interactivemap": "latest"
+    "marked": "^13.0.2"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
