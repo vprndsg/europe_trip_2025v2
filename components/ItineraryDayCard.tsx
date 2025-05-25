@@ -11,15 +11,16 @@ interface ItineraryDayCardProps {
   day: ItineraryDay;
   onSelectLocation?: (id: string) => void;
   selectedLocationId?: string;
+  onHighlightLine?: (line: [number, number][]) => void;
 }
 
-const ItineraryDayCard: React.FC<ItineraryDayCardProps> = ({ day, onSelectLocation, selectedLocationId }) => {
+const ItineraryDayCard: React.FC<ItineraryDayCardProps> = ({ day, onSelectLocation, selectedLocationId, onHighlightLine }) => {
   const renderEvent = (event: ItineraryEvent, index: number) => {
     switch (event.type) {
       case EventType.ACTIVITY:
         return event.activity ? <ActivityItem key={index} activity={event.activity} time={event.time} onSelectLocation={onSelectLocation} selectedLocationId={selectedLocationId} /> : null;
       case EventType.TRAVEL:
-        return event.travelSegment ? <TravelSegmentItem key={index} segment={event.travelSegment} time={event.time} onSelectLocation={onSelectLocation} selectedLocationId={selectedLocationId} /> : null;
+        return event.travelSegment ? <TravelSegmentItem key={index} segment={event.travelSegment} time={event.time} onSelectLocation={onSelectLocation} selectedLocationId={selectedLocationId} onHighlightLine={onHighlightLine} /> : null;
       case EventType.ACCOMMODATION:
         return event.accommodation ? <AccommodationItem key={index} accommodation={event.accommodation} time={event.time} mainLocation={day.mainLocation} onSelectLocation={onSelectLocation} selectedLocationId={selectedLocationId} /> : null;
       case EventType.GENERAL:
