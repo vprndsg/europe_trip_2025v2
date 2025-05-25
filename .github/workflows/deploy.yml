@@ -9,6 +9,7 @@ permissions:
   pages: write
   id-token: write
   actions: read
+    packages: read
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
