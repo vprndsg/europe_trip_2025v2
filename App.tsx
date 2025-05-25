@@ -12,22 +12,8 @@ import { LoadingSpinnerIcon, MapIcon, EyeIcon, EyeSlashIcon } from './components
 const rawItineraryData = `
 Day 1-2 fly to Berlin (June 14-15)
 Arrive 6pm to BER on UA 8715 (prior flight is UA 926 to FRA)
-Public-transport to Neckarstraße 21b, 12053 Berlin
-
-18:19 – board S-Bahn S45 toward Südkreuz at “BER T1-2” station (trains every 20 min).
-– Single ticket Berlin ABC (€4.40) covers the whole trip; buy at DB/BVG machines or in the BVG app.
-– Ride ~34 min.
-
-18:53 – arrive Hermannstraße (last stop). Follow “U8” signs downstairs.
-
-18:57 – board U-Bahn U8 toward Wittenau; ride 1 stop (~2 min).
-
-18:59 – arrive Boddinstraße.
-
-Walk 400 m (≈5 min): exit toward Boddinstraße, head south, turn right on Neckarstraße to 21b.
-
+Uber from BER T1-2 to Neckarstraße 21b, 12053 Berlin
 ETA at Jenn’s house: ~19:05
-
 Neckarstraße 21b, 12053 Berlin, Germany
 
 Days 2-5 hang out in berlin (June 15-18, 2 full days)

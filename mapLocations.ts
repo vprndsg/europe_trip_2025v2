@@ -7,7 +7,7 @@ export interface MapLocation {
 }
 
 export const mapLocations: MapLocation[] = [
-  { id: 'ber-airport', name: 'BER T1-2', position: [52.3651, 13.5098], aliases: ['ber t1-2', 'ber airport'] },
+  { id: 'ber-airport', name: 'BER T1-2', position: [52.3651, 13.5098], aliases: ['ber t1-2', 'ber airport', 'berlin airport', 'berlin brandenburg airport', 'ber'] },
   { id: 'hermannstrasse', name: 'Hermannstraße', position: [52.4673, 13.4315], aliases: ['hermannstraße'], notes: 'Last stop, Berlin ABC Ticket: €4.40' },
   { id: 'boddinstrasse', name: 'Boddinstraße', position: [52.4800, 13.4310], aliases: ['boddinstraße'] },
   { id: 'neckarstrasse', name: 'Neckarstraße 21b', position: [52.4760, 13.4315], aliases: ['neckarstraße 21b'] },
