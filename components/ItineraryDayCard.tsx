@@ -8,19 +8,21 @@ import { MapPinIcon, CalendarIcon } from './IconComponents';
 
 interface ItineraryDayCardProps {
   day: ItineraryDay;
+  onSelectLocation?: (id: string) => void;
+  selectedLocationId?: string;
 }
 
-const ItineraryDayCard: React.FC<ItineraryDayCardProps> = ({ day }) => {
+const ItineraryDayCard: React.FC<ItineraryDayCardProps> = ({ day, onSelectLocation, selectedLocationId }) => {
   const renderEvent = (event: ItineraryEvent, index: number) => {
     switch (event.type) {
       case EventType.ACTIVITY:
-        return event.activity ? <ActivityItem key={index} activity={event.activity} time={event.time} /> : null;
+        return event.activity ? <ActivityItem key={index} activity={event.activity} time={event.time} onSelectLocation={onSelectLocation} selectedLocationId={selectedLocationId} /> : null;
       case EventType.TRAVEL:
-        return event.travelSegment ? <TravelSegmentItem key={index} segment={event.travelSegment} time={event.time} /> : null;
+        return event.travelSegment ? <TravelSegmentItem key={index} segment={event.travelSegment} time={event.time} onSelectLocation={onSelectLocation} selectedLocationId={selectedLocationId} /> : null;
       case EventType.ACCOMMODATION:
-        return event.accommodation ? <AccommodationItem key={index} accommodation={event.accommodation} time={event.time} mainLocation={day.mainLocation} /> : null;
+        return event.accommodation ? <AccommodationItem key={index} accommodation={event.accommodation} time={event.time} mainLocation={day.mainLocation} onSelectLocation={onSelectLocation} selectedLocationId={selectedLocationId} /> : null;
       case EventType.GENERAL:
-        return <GeneralEventItem key={index} description={event.description || ""} time={event.time} />;
+        return <GeneralEventItem key={index} description={event.description || ""} time={event.time} onSelectLocation={onSelectLocation} selectedLocationId={selectedLocationId} />;
       default:
         return null;
     }
