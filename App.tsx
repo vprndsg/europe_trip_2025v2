@@ -128,7 +128,10 @@ Flight EN 8811 from MXP at 2:35pm (then UA 927 from FRA > SFO)
 
 function buildRouteLines(itin: Itinerary): [number, number][][] {
   const lines: [number, number][][] = [];
+
   let lastPos: [number, number] | undefined;
+
+ 
   itin.days.forEach(day => {
     day.events.forEach(event => {
       const seg = event.travelSegment;
@@ -137,6 +140,7 @@ function buildRouteLines(itin: Itinerary): [number, number][][] {
         const toId = findLocationId(seg.to);
         const from = fromId ? getLocationById(fromId) : undefined;
         const to = toId ? getLocationById(toId) : undefined;
+
         const start = from?.position || lastPos;
         const end = to?.position;
         if (start && end) {
@@ -149,8 +153,8 @@ function buildRouteLines(itin: Itinerary): [number, number][][] {
           lastPos = end;
         } else if (from) {
           lastPos = from.position;
-        }
-      }
+
+       }
     });
   });
   return lines;
