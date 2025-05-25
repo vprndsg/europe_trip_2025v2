@@ -5,6 +5,7 @@ import TravelSegmentItem from './TravelSegmentItem';
 import AccommodationItem from './AccommodationItem';
 import GeneralEventItem from './GeneralEventItem';
 import { MapPinIcon, CalendarIcon } from './IconComponents';
+import WeatherForecast from './WeatherForecast';
 
 interface ItineraryDayCardProps {
   day: ItineraryDay;
@@ -46,6 +47,7 @@ const ItineraryDayCard: React.FC<ItineraryDayCardProps> = ({ day, onSelectLocati
         )}
       </div>
       <div className="p-6 space-y-6">
+        <WeatherForecast location={day.mainLocation} />
         {day.events.length > 0 ? (
           day.events.map(renderEvent)
         ) : (
