@@ -59,7 +59,7 @@ export async function fetchForecast(location: string): Promise<ForecastDay[]> {
     .split('T')[0];
 
   const weatherRes = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto&start_date=${startDate}&end_date=${endDate}`
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto&temperature_unit=fahrenheit&start_date=${startDate}&end_date=${endDate}`
   );
   const weatherData = await weatherRes.json();
   const daily = weatherData.daily;
@@ -76,8 +76,8 @@ export async function fetchForecast(location: string): Promise<ForecastDay[]> {
     days.push({
       date: dateStr,
       conditions: describeWeather(daily.weathercode[i]),
-      high: `${Math.round(daily.temperature_2m_max[i])}°C`,
-      low: `${Math.round(daily.temperature_2m_min[i])}°C`
+      high: `${Math.round(daily.temperature_2m_max[i])}°F`,
+      low: `${Math.round(daily.temperature_2m_min[i])}°F`
     });
   }
   return days;
