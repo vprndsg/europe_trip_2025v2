@@ -141,13 +141,9 @@ const transitLinesGroupRef = useRef<any>(null);
       return () => {
         navigator.geolocation.clearWatch(watchId);
         if (mapInstanceRef.current) {
- -
           if (transitLinesGroupRef.current) {
             transitLinesGroupRef.current.clearLayers();
           }
-
-
- 
           mapInstanceRef.current.remove();
           mapInstanceRef.current = null;
         }
@@ -159,7 +155,6 @@ const transitLinesGroupRef = useRef<any>(null);
   }, []); // Empty dependency array ensures this runs once on mount
 
   useEffect(() => {
-<
     if (!mapInstanceRef.current || !transitLinesGroupRef.current) return;
     const group = transitLinesGroupRef.current;
     group.clearLayers();
