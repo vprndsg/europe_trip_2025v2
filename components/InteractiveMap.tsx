@@ -8,14 +8,16 @@ declare var L: any;
 
 interface InteractiveMapProps {
   markers?: MapLocation[];
+  lines?: [number, number][][];
   selectedLocationId?: string;
 }
 
-const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], selectedLocationId }) => {
+const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], lines = [], selectedLocationId }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null); // To store Leaflet map instance
   const userMarkerRef = useRef<any>(null); // To store user's location marker
   const markerMapRef = useRef<Record<string, any>>({});
+  const transitLinesGroupRef = useRef<any>(null);
   
   const [currentPosition, setCurrentPosition] = useState<[number, number] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -51,10 +53,20 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], selectedL
       "Street Map": osmLayer,
       "Satellite": satelliteLayer
     };
+    const transitLinesGroup = L.layerGroup();
+    transitLinesGroupRef.current = transitLinesGroup;
+
     const overlayMaps = {
-      "Hiking Trails": hikingTrailsLayer
+      "Hiking Trails": hikingTrailsLayer,
+      "Transit Lines": transitLinesGroup
     };
     L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+    // Add initial lines to transit group
+    lines.forEach(path => {
+      L.polyline(path, { color: '#38BDF8', weight: 4, opacity: 0.7 }).addTo(transitLinesGroup);
+    });
+    transitLinesGroup.addTo(map);
 
     // Custom 'You are here' icon
     const userIcon = L.divIcon({
@@ -79,6 +91,16 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], selectedL
       })}).addTo(map).bindPopup(`<strong>${loc.name}</strong>${loc.notes ? '<br/>'+loc.notes : ''}`);
       markerMapRef.current[loc.id] = marker;
     });
+
+
+
+    // Fit map to markers and lines
+    const bounds = L.latLngBounds([]);
+    markers.forEach(loc => bounds.extend(loc.position));
+    lines.forEach(path => path.forEach(p => bounds.extend(p)));
+    if (bounds.isValid()) {
+      map.fitBounds(bounds.pad(0.2));
+    }
 
     // Geolocation
     if (navigator.geolocation) {
@@ -120,6 +142,9 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], selectedL
       return () => {
         navigator.geolocation.clearWatch(watchId);
         if (mapInstanceRef.current) {
+          if (transitLinesGroupRef.current) {
+            transitLinesGroupRef.current.clearLayers();
+          }
           mapInstanceRef.current.remove();
           mapInstanceRef.current = null;
         }
@@ -129,6 +154,23 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], selectedL
       setIsLocating(false);
     }
   }, []); // Empty dependency array ensures this runs once on mount
+
+  useEffect(() => {
+    if (!mapInstanceRef.current || !transitLinesGroupRef.current) return;
+    const group = transitLinesGroupRef.current;
+    group.clearLayers();
+    lines.forEach(path => {
+      L.polyline(path, { color: '#38BDF8', weight: 4, opacity: 0.7 }).addTo(group);
+    });
+    if (lines.length > 0) {
+      const bounds = L.latLngBounds([]);
+      lines.forEach(path => path.forEach(p => bounds.extend(p)));
+      Object.values(markerMapRef.current).forEach((m: any) => bounds.extend(m.getLatLng()));
+      if (bounds.isValid()) {
+        mapInstanceRef.current.fitBounds(bounds.pad(0.2));
+      }
+    }
+  }, [lines]);
 
   useEffect(() => {
     if (!mapInstanceRef.current || !selectedLocationId) return;
