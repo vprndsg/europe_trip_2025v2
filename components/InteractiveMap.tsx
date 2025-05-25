@@ -1,14 +1,22 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { CrosshairsIcon, MapPinIcon, InformationCircleIcon } from './IconComponents';
+import { CrosshairsIcon, InformationCircleIcon } from './IconComponents';
+import { MapLocation } from '../mapLocations';
 
 // Declare L globally for Leaflet
 declare var L: any;
 
-const InteractiveMap: React.FC = () => {
+interface InteractiveMapProps {
+  markers?: MapLocation[];
+  selectedLocationId?: string;
+  onSelectLocation?: (id: string) => void;
+}
+
+const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], selectedLocationId, onSelectLocation }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null); // To store Leaflet map instance
   const userMarkerRef = useRef<any>(null); // To store user's location marker
+  const markerMapRef = useRef<Record<string, any>>({});
   
   const [currentPosition, setCurrentPosition] = useState<[number, number] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -61,6 +69,23 @@ const InteractiveMap: React.FC = () => {
         iconAnchor: [12, 12]
     });
 
+    // Add provided markers
+    markers.forEach(loc => {
+      const marker = L.marker(loc.position, {
+        icon: L.icon({
+          iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+          shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png'
+        })
+      })
+        .addTo(map)
+        .bindPopup(`<strong>${loc.name}</strong>${loc.notes ? '<br/>' + loc.notes : ''}`);
+      marker.on('click', () => onSelectLocation?.(loc.id));
+      markerMapRef.current[loc.id] = marker;
+    });
+
     // Geolocation
     if (navigator.geolocation) {
       const watchId = navigator.geolocation.watchPosition(
@@ -110,6 +135,32 @@ const InteractiveMap: React.FC = () => {
       setIsLocating(false);
     }
   }, []); // Empty dependency array ensures this runs once on mount
+
+  useEffect(() => {
+    if (!mapInstanceRef.current || !selectedLocationId) return;
+    const marker = markerMapRef.current[selectedLocationId];
+    if (marker) {
+      Object.keys(markerMapRef.current).forEach(id => {
+        const m = markerMapRef.current[id];
+        m.setIcon(L.icon({
+          iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+          shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png'
+        }));
+      });
+      marker.setIcon(L.icon({
+        iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+        iconSize: [30, 50],
+        iconAnchor: [15, 50],
+        popupAnchor: [1, -34],
+        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png'
+      }));
+      mapInstanceRef.current.setView(marker.getLatLng(), 15, { animate: true });
+      marker.openPopup();
+    }
+  }, [selectedLocationId]);
 
   const recenterMap = () => {
     if (mapInstanceRef.current && currentPosition) {

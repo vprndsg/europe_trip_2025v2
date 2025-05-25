@@ -1,15 +1,20 @@
 import React from 'react';
 import { InformationCircleIcon, ClockIcon } from './IconComponents';
 import { createGoogleMapsSearchLink } from '../utils';
+import { findLocationId } from '../mapLocations';
 
 interface GeneralEventItemProps {
   description: string;
   time?: string;
+  onSelectLocation?: (id: string) => void;
+  selectedLocationId?: string;
 }
 
-const GeneralEventItem: React.FC<GeneralEventItemProps> = ({ description, time }) => {
+const GeneralEventItem: React.FC<GeneralEventItemProps> = ({ description, time, onSelectLocation, selectedLocationId }) => {
   const addressMatch = description.match(/^(?:Destination Address|Address): (.*)/i);
   let content;
+  const locationId = findLocationId(addressMatch ? addressMatch[1] : description);
+  const isSelected = selectedLocationId && locationId === selectedLocationId;
 
   if (addressMatch && addressMatch[1]) {
     const addressLabel = description.substring(0, description.indexOf(addressMatch[1]));
@@ -33,7 +38,12 @@ const GeneralEventItem: React.FC<GeneralEventItemProps> = ({ description, time }
   }
 
   return (
-    <div className="bg-slate-700/50 p-4 rounded-lg shadow-md border-l-4 border-slate-500">
+    <div
+      className={`bg-slate-700/50 p-4 rounded-lg shadow-md border-l-4 border-slate-500 ${isSelected ? 'ring-2 ring-slate-400' : ''}`}
+      onClick={() => locationId && onSelectLocation?.(locationId)}
+      role={locationId ? 'button' : undefined}
+      tabIndex={locationId ? 0 : -1}
+    >
       <div className="flex items-start">
         <InformationCircleIcon className="w-6 h-6 text-slate-400 mr-3 mt-1 flex-shrink-0" />
         <div>
