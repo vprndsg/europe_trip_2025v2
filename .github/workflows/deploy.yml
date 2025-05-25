@@ -7,8 +7,8 @@ on:
 permissions:
     contents: read
     pages: write
-  id  -token: write
-  ac  tions: read
+  id-token: write
+  actions: read
       packages: read
 jobs:
   build-and-deploy:
