@@ -27,7 +27,8 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install          # ← replaces npm ci
+
 
       - name: Build
         run: npm run build          # adjust if your build script is different
