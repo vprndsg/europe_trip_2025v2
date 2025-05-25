@@ -10,14 +10,17 @@ interface InteractiveMapProps {
   markers?: MapLocation[];
   lines?: [number, number][][];
   selectedLocationId?: string;
+  panTo?: [number, number] | null;
+  highlightLine?: [number, number][] | null;
 }
 
-const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], lines = [], selectedLocationId }) => {
+const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], lines = [], selectedLocationId, panTo, highlightLine }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null); // To store Leaflet map instance
   const userMarkerRef = useRef<any>(null); // To store user's location marker
   const markerMapRef = useRef<Record<string, any>>({});
-const transitLinesGroupRef = useRef<any>(null);
+  const transitLinesGroupRef = useRef<any>(null);
+  const highlightLineRef = useRef<any>(null);
   const [currentPosition, setCurrentPosition] = useState<[number, number] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLocating, setIsLocating] = useState<boolean>(true);
@@ -198,6 +201,26 @@ const transitLinesGroupRef = useRef<any>(null);
       marker.openPopup();
     }
   }, [selectedLocationId]);
+
+  useEffect(() => {
+    if (!mapInstanceRef.current) return;
+    if (panTo) {
+      mapInstanceRef.current.panTo(panTo);
+    }
+  }, [panTo]);
+
+  useEffect(() => {
+    if (!mapInstanceRef.current) return;
+    if (highlightLineRef.current) {
+      mapInstanceRef.current.removeLayer(highlightLineRef.current);
+      highlightLineRef.current = null;
+    }
+    if (highlightLine && highlightLine.length > 1) {
+      highlightLineRef.current = L.polyline(highlightLine, { color: '#f97316', weight: 5 }).addTo(mapInstanceRef.current);
+      const bounds = L.latLngBounds(highlightLine);
+      mapInstanceRef.current.fitBounds(bounds.pad(0.2));
+    }
+  }, [highlightLine]);
 
   const recenterMap = () => {
     if (mapInstanceRef.current && currentPosition) {

@@ -153,6 +153,8 @@ const App: React.FC = () => {
   const [showMap, setShowMap] = useState<boolean>(false);
   const [selectedLocationId, setSelectedLocationId] = useState<string | undefined>(undefined);
   const [routeLines, setRouteLines] = useState<[number, number][][]>([]);
+  const [panTarget, setPanTarget] = useState<[number, number] | null>(null);
+  const [highlightLine, setHighlightLine] = useState<[number, number][] | null>(null);
 
   useEffect(() => {
     try {
@@ -172,12 +174,24 @@ const App: React.FC = () => {
 
   const handleSelectLocation = (id: string) => {
     setSelectedLocationId(id);
+    setHighlightLine(null);
+    if (!showMap) setShowMap(true);
+  };
+
+  const handleHighlightLine = (line: [number, number][]) => {
+    setHighlightLine(line);
+    if (!showMap) setShowMap(true);
+  };
+
+  const handleHeaderClick = () => {
+    setPanTarget([52.52, 13.405]);
+    setHighlightLine(null);
     if (!showMap) setShowMap(true);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-700 text-slate-100 flex flex-col">
-      <Header title={itinerary?.title || "Trip Itinerary"} />
+      <Header title={itinerary?.title || "Trip Itinerary"} onClick={handleHeaderClick} />
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="mb-6 flex justify-end">
           <button
@@ -197,6 +211,8 @@ const App: React.FC = () => {
               markers={mapLocations}
               lines={routeLines}
               selectedLocationId={selectedLocationId}
+              panTo={panTarget}
+              highlightLine={highlightLine}
             />
           </div>
         )}
@@ -216,7 +232,13 @@ const App: React.FC = () => {
         {itinerary && !isLoading && !error && (
           <div className="space-y-8">
             {itinerary.days.map((day: ItineraryDayType) => (
-              <ItineraryDayCard key={day.id} day={day} onSelectLocation={handleSelectLocation} selectedLocationId={selectedLocationId} />
+              <ItineraryDayCard
+                key={day.id}
+                day={day}
+                onSelectLocation={handleSelectLocation}
+                selectedLocationId={selectedLocationId}
+                onHighlightLine={handleHighlightLine}
+              />
             ))}
           </div>
         )}
