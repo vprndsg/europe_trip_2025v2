@@ -6,7 +6,7 @@ import ItineraryDayCard from './components/ItineraryDayCard';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import InteractiveMap from './components/InteractiveMap';
-import { mapLocations } from './mapLocations';
+import { mapLocations, findLocationId, getLocationById } from './mapLocations';
 import { LoadingSpinnerIcon, MapIcon, EyeIcon, EyeSlashIcon } from './components/IconComponents';
 
 const rawItineraryData = `
@@ -126,18 +126,54 @@ Payment: (Payment methods to be confirmed with driver directly)
 Flight EN 8811 from MXP at 2:35pm (then UA 927 from FRA > SFO)
 `;
 
+function buildRouteLines(itin: Itinerary): [number, number][][] {
+  const lines: [number, number][][] = [];
+  let lastLocation: MapLocation | undefined;
+
+  itin.days.forEach(day => {
+    day.events.forEach(event => {
+      const seg = event.travelSegment;
+      if (!seg) return;
+
+      const fromId = findLocationId(seg.from);
+      const toId = findLocationId(seg.to);
+      const from = fromId ? getLocationById(fromId) : undefined;
+      const to = toId ? getLocationById(toId) : undefined;
+
+      const start = from || lastLocation;
+      const end = to;
+
+      if (start && end) {
+        lines.push([start.position, end.position]);
+        lastLocation = end;
+      } else if (end) {
+        if (lastLocation) {
+          lines.push([lastLocation.position, end.position]);
+        }
+        lastLocation = end;
+      } else if (start) {
+        lastLocation = start;
+      }
+    });
+  });
+
+  return lines;
+}
+
 const App: React.FC = () => {
   const [itinerary, setItinerary] = useState<Itinerary | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [showMap, setShowMap] = useState<boolean>(false);
   const [selectedLocationId, setSelectedLocationId] = useState<string | undefined>(undefined);
+  const [routeLines, setRouteLines] = useState<[number, number][][]>([]);
 
   useEffect(() => {
     try {
       setIsLoading(true);
       const parsedData = parseItinerary(rawItineraryData);
       setItinerary(parsedData);
+      setRouteLines(buildRouteLines(parsedData));
       setError(null);
     } catch (e) {
       console.error("Error parsing itinerary:", e);
@@ -171,7 +207,11 @@ const App: React.FC = () => {
 
         {showMap && (
           <div className="mb-8 p-4 bg-slate-800 rounded-lg shadow-xl sticky top-20 z-40">
-            <InteractiveMap markers={mapLocations} selectedLocationId={selectedLocationId} />
+            <InteractiveMap
+              markers={mapLocations}
+              lines={routeLines}
+              selectedLocationId={selectedLocationId}
+            />
           </div>
         )}
 
