@@ -5,11 +5,11 @@ on:
         branches: [ main ]
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-  actions: read
-    packages: read
+    contents: read
+    pages: write
+  id  -token: write
+  ac  tions: read
+      packages: read
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
