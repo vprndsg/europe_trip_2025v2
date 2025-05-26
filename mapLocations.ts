@@ -10,7 +10,7 @@ export const mapLocations: MapLocation[] = [
   { id: 'ber-airport', name: 'BER T1-2', position: [52.3651, 13.5098], aliases: ['ber t1-2', 'ber airport', 'berlin airport', 'berlin brandenburg airport', 'ber'] },
   { id: 'hermannstrasse', name: 'Hermannstraße', position: [52.4673, 13.4315], aliases: ['hermannstraße'], notes: 'Last stop, Berlin ABC Ticket: €4.40' },
   { id: 'boddinstrasse', name: 'Boddinstraße', position: [52.4796, 13.4323], aliases: ['boddinstraße'] },
-  { id: 'neckarstrasse', name: 'Neckarstraße 21b', position: [52.4789, 13.4374], aliases: ['neckarstraße 21b'] },
+  { id: 'neckarstrasse', name: 'Neckarstraße 21b', position: [52.480248, 13.434019], aliases: ['neckarstraße 21b'] },
   { id: 'berlin-sudkreuz', name: 'Berlin Südkreuz', position: [52.4753, 13.3658], aliases: ['südkreuz', 'berlin südkreuz', 'suedkreuz'] },
   { id: 'appenzell', name: 'Appenzell', position: [47.3308, 9.4088], aliases: ['appenzell'] },
   { id: 'munich-hbf', name: 'München Hbf', position: [48.1402, 11.5585], aliases: ['munich hbf', 'münchen hbf', 'munchen hbf'] },
