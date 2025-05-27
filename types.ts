@@ -23,6 +23,7 @@ export interface TravelSegment {
 export interface Accommodation {
   name: string;
   reservationDetails?: string;
+  arrivalTime?: string;
   address?: string;
   notes?: string[];
 }
