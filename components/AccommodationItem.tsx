@@ -69,9 +69,35 @@ const AccommodationItem: React.FC<AccommodationItemProps> = ({ accommodation, ti
         <div className="mt-3 pt-2 border-t border-slate-600">
           <h5 className="text-xs font-semibold text-slate-400 mb-1">Notes:</h5>
           <ul className="list-disc list-inside pl-1 space-y-1">
-            {accommodation.notes.map((note, idx) => (
-              <li key={idx} className="text-xs text-slate-300 whitespace-pre-line">{note}</li>
-            ))}
+            {accommodation.notes.map((note, idx) => {
+              const cleaned = note.replace(/^\u2022\s*/, '').trim();
+              const addressMatch = cleaned.match(/^Address\s*:\s*(.*)$/i);
+              if (addressMatch) {
+                const [addrPart, ...restParts] = addressMatch[1].split('|');
+                const address = addrPart.trim();
+                const remainder = restParts.join('|').trim();
+                return (
+                  <li key={idx} className="text-xs text-slate-300 whitespace-pre-line">
+                    Address:
+                    <a
+                      href={createGoogleMapsSearchLink(address)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-300 hover:text-sky-300 hover:underline ml-1"
+                      aria-label={`View ${address} on Google Maps`}
+                    >
+                      {address}
+                    </a>
+                    {remainder ? ` | ${remainder}` : ''}
+                  </li>
+                );
+              }
+              return (
+                <li key={idx} className="text-xs text-slate-300 whitespace-pre-line">
+                  {cleaned}
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}
