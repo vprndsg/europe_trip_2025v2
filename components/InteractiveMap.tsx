@@ -255,7 +255,7 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], lines = [
        <button
         onClick={recenterMap}
         disabled={!currentPosition && !isLocating}
-        className="absolute top-3 right-3 z-[1001] bg-slate-800 hover:bg-slate-700 text-white font-semibold py-2 px-3 rounded-lg shadow-lg transition-colors duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+        className="absolute bottom-3 left-3 z-[1001] bg-slate-800 hover:bg-slate-700 text-white font-semibold py-2 px-3 rounded-lg shadow-lg transition-colors duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
         title="Recenter on Me"
         aria-label="Recenter map on current location"
       >
