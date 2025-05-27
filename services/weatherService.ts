@@ -5,6 +5,9 @@ export interface ForecastDay {
   low: string;
 }
 
+// Local fallback data used when network requests fail
+import fallbackForecasts from '../src/data/fallbackWeather';
+
 const weatherCodeDescriptions: Record<number, string> = {
   0: 'Clear sky',
   1: 'Mainly clear',
@@ -48,52 +51,59 @@ const fallbackCoords: Record<string, { latitude: number; longitude: number }> = 
 };
 
 export async function fetchForecast(location: string): Promise<ForecastDay[]> {
-  // Fetch coordinates for the location
-  let latitude: number | undefined;
-  let longitude: number | undefined;
+  try {
+    // Fetch coordinates for the location
+    let latitude: number | undefined;
+    let longitude: number | undefined;
 
-  const geoRes = await fetch(
-    `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(location)}&count=1&language=en&format=json`
-  );
-  const geoData = await geoRes.json();
-  if (geoData.results && geoData.results.length > 0) {
-    ({ latitude, longitude } = geoData.results[0]);
-  } else if (fallbackCoords[location]) {
-    ({ latitude, longitude } = fallbackCoords[location]);
+    const geoRes = await fetch(
+      `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(location)}&count=1&language=en&format=json`
+    );
+    const geoData = await geoRes.json();
+    if (geoData.results && geoData.results.length > 0) {
+      ({ latitude, longitude } = geoData.results[0]);
+    } else if (fallbackCoords[location]) {
+      ({ latitude, longitude } = fallbackCoords[location]);
+    }
+
+    if (latitude === undefined || longitude === undefined) {
+      throw new Error('Location not found');
+    }
+
+    // Determine date range for the next three days
+    const now = new Date();
+    const startDate = now.toISOString().split('T')[0];
+    const endDate = new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .split('T')[0];
+
+    const weatherRes = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto&temperature_unit=fahrenheit&start_date=${startDate}&end_date=${endDate}`
+    );
+    const weatherData = await weatherRes.json();
+    const daily = weatherData.daily;
+    if (!daily || !daily.time) {
+      throw new Error('No forecast data');
+    }
+
+    const days: ForecastDay[] = [];
+    for (let i = 0; i < daily.time.length && i < 3; i++) {
+      const dateStr = new Date(daily.time[i]).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric'
+      });
+      days.push({
+        date: dateStr,
+        conditions: describeWeather(daily.weathercode[i]),
+        high: `${Math.round(daily.temperature_2m_max[i])}°F`,
+        low: `${Math.round(daily.temperature_2m_min[i])}°F`
+      });
+    }
+    return days;
+  } catch (err) {
+    if (fallbackForecasts[location]) {
+      return fallbackForecasts[location];
+    }
+    throw err;
   }
-
-  if (latitude === undefined || longitude === undefined) {
-    throw new Error('Location not found');
-  }
-
-  // Determine date range for the next three days
-  const now = new Date();
-  const startDate = now.toISOString().split('T')[0];
-  const endDate = new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000)
-    .toISOString()
-    .split('T')[0];
-
-  const weatherRes = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto&temperature_unit=fahrenheit&start_date=${startDate}&end_date=${endDate}`
-  );
-  const weatherData = await weatherRes.json();
-  const daily = weatherData.daily;
-  if (!daily || !daily.time) {
-    throw new Error('No forecast data');
-  }
-
-  const days: ForecastDay[] = [];
-  for (let i = 0; i < daily.time.length && i < 3; i++) {
-    const dateStr = new Date(daily.time[i]).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric'
-    });
-    days.push({
-      date: dateStr,
-      conditions: describeWeather(daily.weathercode[i]),
-      high: `${Math.round(daily.temperature_2m_max[i])}°F`,
-      low: `${Math.round(daily.temperature_2m_min[i])}°F`
-    });
-  }
-  return days;
 }
