@@ -32,7 +32,6 @@ EC 190 — Wagon 4 — Seats 61/62/63/68 (2 window, 2 aisle, open coach)
 Reservation No.: 804880024366
 
 Arrival in St. Gallen (CH): 05:28pm
-
 Departure: St. Gallen HB platform 11/12 at 5:31 PM (AB S21, direct)
 Arrival in Appenzell at 6:08 PM 
 Notes:
