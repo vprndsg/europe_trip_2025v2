@@ -22,7 +22,16 @@ const ItineraryDayCard: React.FC<ItineraryDayCardProps> = ({ day, onSelectLocati
       case EventType.TRAVEL:
         return event.travelSegment ? <TravelSegmentItem key={index} segment={event.travelSegment} time={event.time} onSelectLocation={onSelectLocation} selectedLocationId={selectedLocationId} onHighlightLine={onHighlightLine} /> : null;
       case EventType.ACCOMMODATION:
-        return event.accommodation ? <AccommodationItem key={index} accommodation={event.accommodation} time={event.time} mainLocation={day.mainLocation} onSelectLocation={onSelectLocation} selectedLocationId={selectedLocationId} /> : null;
+        return event.accommodation ? (
+          <AccommodationItem
+            key={index}
+            accommodation={event.accommodation}
+            time={event.accommodation.arrivalTime || event.time}
+            mainLocation={day.mainLocation}
+            onSelectLocation={onSelectLocation}
+            selectedLocationId={selectedLocationId}
+          />
+        ) : null;
       case EventType.GENERAL:
         return <GeneralEventItem key={index} description={event.description || ""} time={event.time} onSelectLocation={onSelectLocation} selectedLocationId={selectedLocationId} />;
       default:

@@ -22,14 +22,16 @@ export function parseItinerary(text: string): Itinerary {
   const etaRegex = /ETA at (.*?): (.*)/i;
   const addressRegex = /^(Neckarstraße 21b, 12053 Berlin, Germany)/i;
 
-  const departureRegex = /^Departure: (.*?) at (\d{2}:\d{2}(?:am|pm)?)\.?/i;
+  const timePattern = '(\\d{1,2}:\\d{2}(?:\\s?(?:am|pm|AM|PM))?)';
+  const departureRegex = new RegExp(`^Departure: (.*?) at ${timePattern}(?: \\((.*?)\\))?`, 'i');
   const trainDetailsRegex = /^(\w+ \d+), Seats: (.*?), Reservation No.: (.*)/i;
-  const arrivalInRegex = /^Arrival (?:in|at) (.*?): (\d{2}:\d{2}(?:am|pm)?)/i;
-  const transferRegex = /^Transfer(?: at|:) (.*?)(?:, depart at |, depart )(\d{2}:\d{2}(?:am|pm)?)/i;
+  const arrivalInRegex = new RegExp(`^Arrival (?:in|at) (.*?)(?: at|: )${timePattern}`, 'i');
+  const transferRegex = new RegExp(`^Transfer(?: at|:) (.*?)(?:, depart at |, depart )${timePattern}`, 'i');
   
   const continueToRegex = /Continue from (.*?) to (.*)/i;
   const stayAtRegex = /^(?:Stay|Stay in Menaggio) at (.*?)(?:, res under (.*?))?$/i; // "Stay at Gasthaus Hof" or "Stay in Menaggio at this Airbnb"
   const overnightRegex = /^Overnight: (.*?)(?:\s+\((.*?)\))?$/i;
+  const accommodationArrivalRegex = /^Arrival at hotel:?\s*~?(\d{1,2}:\d{2}(?:\s?(?:am|pm|AM|PM))?)/i;
 
   const routeStartRegex = /^Route:$/i;
   const distanceRegex = /^Distance: (.*)/i;
@@ -185,8 +187,10 @@ export function parseItinerary(text: string): Itinerary {
       event = { type: EventType.GENERAL, description: `Destination Address: ${line}` };
     } else if (line.match(departureRegex)) {
       const match = line.match(departureRegex)!;
-      const from = match[1]; const time = match[2];
-      let details = `Depart from ${from} at ${time}`; let operator, reservationInfo;
+      const from = match[1]; const time = match[2]; const extra = match[3];
+      let details = `Depart from ${from} at ${time}`;
+      if (extra) details += ` (${extra})`;
+      let operator, reservationInfo;
       const notes: string[] = [];
       if (lines[i+1] && (lines[i+1].toLowerCase().includes('jenn booking train tickets') || lines[i+1].toLowerCase().includes('(jenn booking tickets)'))) {
           notes.push(lines[i+1].replace('(Jenn booking tickets)','Jenn booking tickets').trim());
@@ -266,7 +270,22 @@ export function parseItinerary(text: string): Itinerary {
       while(k < lines.length) {
           const nextL = lines[k].trim();
           if(!nextL || nextL.match(dayTitleRegex) || nextL.match(juneDateTitleRegex) || nextL.match(departureRegex) || nextL.match(routeStartRegex) || nextL.match(stayAtRegex) || nextL.match(overnightRegex) || nextL.match(privateTaxiRegex) || nextL.match(flightDepartureRegex)) break;
-          addNoteToContext(nextL, event);
+
+          const arrivalMatch = nextL.match(accommodationArrivalRegex);
+          if (arrivalMatch) {
+              event.accommodation!.arrivalTime = arrivalMatch[1];
+          } else if (nextL.match(notesStartRegex)) {
+              k++;
+              while(k < lines.length) {
+                  const noteLine = lines[k].trim();
+                  if(!noteLine || noteLine.match(dayTitleRegex) || noteLine.match(juneDateTitleRegex) || noteLine.match(departureRegex) || noteLine.match(routeStartRegex) || noteLine.match(stayAtRegex) || noteLine.match(overnightRegex) || noteLine.match(privateTaxiRegex) || noteLine.match(flightDepartureRegex)) break;
+                  addNoteToContext(noteLine, event);
+                  k++;
+              }
+              break;
+          } else {
+              addNoteToContext(nextL, event);
+          }
           k++;
       }
       consumedLines += (k - (i+1));
@@ -277,7 +296,22 @@ export function parseItinerary(text: string): Itinerary {
       while(k < lines.length) {
           const nextL = lines[k].trim();
           if(!nextL || nextL.match(dayTitleRegex) || nextL.match(juneDateTitleRegex) || nextL.match(departureRegex) || nextL.match(routeStartRegex) || nextL.match(stayAtRegex) || nextL.match(overnightRegex) || nextL.match(privateTaxiRegex)|| nextL.match(flightDepartureRegex)) break;
-          addNoteToContext(nextL, event);
+
+          const arrivalMatch = nextL.match(accommodationArrivalRegex);
+          if (arrivalMatch) {
+              event.accommodation!.arrivalTime = arrivalMatch[1];
+          } else if (nextL.match(notesStartRegex)) {
+              k++;
+              while(k < lines.length) {
+                  const noteLine = lines[k].trim();
+                  if(!noteLine || noteLine.match(dayTitleRegex) || noteLine.match(juneDateTitleRegex) || noteLine.match(departureRegex) || noteLine.match(routeStartRegex) || noteLine.match(stayAtRegex) || noteLine.match(overnightRegex) || noteLine.match(privateTaxiRegex)|| noteLine.match(flightDepartureRegex)) break;
+                  addNoteToContext(noteLine, event);
+                  k++;
+              }
+              break;
+          } else {
+              addNoteToContext(nextL, event);
+          }
           k++;
       }
       consumedLines += (k - (i+1));

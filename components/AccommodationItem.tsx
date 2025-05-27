@@ -18,6 +18,8 @@ const AccommodationItem: React.FC<AccommodationItemProps> = ({ accommodation, ti
   const locationId = findLocationId(accommodation.address || nameQuery);
   const isSelected = selectedLocationId && locationId === selectedLocationId;
 
+  const displayTime = accommodation.arrivalTime || time;
+
   return (
     <div
       className={`bg-slate-700/50 p-4 rounded-lg shadow-md border-l-4 border-indigo-500 ${isSelected ? 'ring-2 ring-indigo-400' : ''}`}
@@ -43,7 +45,11 @@ const AccommodationItem: React.FC<AccommodationItemProps> = ({ accommodation, ti
               accommodation.name
             )}
           </h4>
-          {time && <p className="text-xs text-slate-400 flex items-center"><ClockIcon className="w-3 h-3 mr-1" /> Check-in around: {time}</p>}
+          {displayTime && (
+            <p className="text-xs text-slate-400 flex items-center">
+              <ClockIcon className="w-3 h-3 mr-1" /> Check-in around: {displayTime}
+            </p>
+          )}
         </div>
       </div>
       
