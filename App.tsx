@@ -24,9 +24,10 @@ Departure: Berlin Südkreuz at 09:41AM (Jenn booking tickets)
 ICE 703, Seats: Wagon 7, Seats 123, 124, 127, 128 (2 window, 2 aisle, table seating, open coach, mobile-friendly)
 Reservation No.: 804880024364
 
-Arrival in München Hbf: 2:02PM
+Arrival in München Hbf: 02:02PM
 
-Transfer at München Hbf: Depart at 2:54PM
+Transfer at München Hbf, depart at 02:54PM
+
 EC 190, Seats: Wagon 4, Seats 61, 62, 63, 68 (2 window, 2 aisle, open coach)
 Reservation No.: 804880024366
 
