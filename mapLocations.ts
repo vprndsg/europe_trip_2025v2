@@ -36,6 +36,67 @@ export const mapLocations: MapLocation[] = [
       'via iv novembre 6',
       'this airbnb'   // extra alias from the feature branch
     ] },
+  // Berlin food & drink spots
+  {
+    id: 'hops-barley',
+    name: 'Hops & Barley Hausbrauerei',
+    position: [52.5090, 13.4606],
+    aliases: ['hops & barley', 'hops and barley', 'hops barley'],
+    notes: 'Tiny Friedrichshain brew-pub pouring its own unfiltered Märzen, plus bratwurst rolls on weekend nights'
+  },
+  {
+    id: 'brlo-gleisdreieck',
+    name: 'BRLO Brwhouse',
+    position: [52.49997, 13.37353],
+    aliases: ['brlo', 'brlo brwhouse', 'brlo gleisdreieck'],
+    notes: 'Container-built beer-garden in Park am Gleisdreieck; order the house Helles and a smoked-sausage platter'
+  },
+  {
+    id: 'konnopkes',
+    name: 'Konnopke\u2019s Imbiss',
+    position: [52.54066, 13.41219],
+    aliases: ["konnopke's", 'konnopkes', 'konnopke\u2019s imbiss'],
+    notes: 'Berlin\u2019s classic Currywurst stand under the elevated U2—cheap, quick, iconic'
+  },
+  {
+    id: 'fotoimpex',
+    name: 'Fotoimpex (analog-camera shop)',
+    position: [52.5200, 13.4049],
+    aliases: ['fotoimpex', 'fotoimpex berlin'],
+    notes: 'Your go-to for film, batteries and last-minute lens wipes before the Alps leg (store is on Alte Sch\u00F6nhauser Str. 32B)'
+  },
+
+  // Appenzell stops
+  {
+    id: 'locher-brewery',
+    name: 'Brauerei Locher AG / “Qu\u00F6llfrisch” Visitor-Centre',
+    position: [47.33099, 9.41246],
+    aliases: ['brauerei locher', 'qu\u00F6llfrisch', 'locher brewery'],
+    notes: '160-year-old brewery—30-min tasting tour daily at 10:15; pick up trail-friendly 33 cl cans'
+  },
+  {
+    id: 'faessler-butcher',
+    name: 'Metzgerei F\u00E4ssler',
+    position: [47.33173, 9.39944],
+    aliases: ['metzgerei f\u00E4ssler', 'metzgerei faessler', 'faessler'],
+    notes: 'Family butcher (since 1895) two streets from Gasthaus Hof; grab Appenzeller Siedwurst for backpack lunches'
+  },
+
+  // Lake Como area
+  {
+    id: 'divino-13',
+    name: 'Divino 13 bar (Piazza Garibaldi, Menaggio)',
+    position: [46.0172, 9.2374],
+    aliases: ['divino 13', 'divino13', 'divino bar menaggio'],
+    notes: '8 taps rotating Italian craft brews + taglieri of local salumi; perfect first-night stroll spot'
+  },
+  {
+    id: 'birrificio-como',
+    name: 'Il Birrificio di Como',
+    position: [45.79530, 8.95798],
+    aliases: ['birrificio di como', 'il birrificio di como', 'como brewery'],
+    notes: 'Lombardy\u2019s flagship brew-pub (20 km south; easy train hop). Try the “Hammer” Doppelbock with their porchetta sandwich.'
+  },
 ];
 
 export function findLocationId(text?: string): string | undefined {
