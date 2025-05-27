@@ -197,7 +197,8 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], lines = [
         popupAnchor: [1, -34],
         shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png'
       }));
-      mapInstanceRef.current.setView(marker.getLatLng(), 15, { animate: true });
+      const zoom = selectedLocationId === 'berlin-city' ? 12 : 15;
+      mapInstanceRef.current.setView(marker.getLatLng(), zoom, { animate: true });
       marker.openPopup();
     }
   }, [selectedLocationId]);

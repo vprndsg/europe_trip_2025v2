@@ -153,7 +153,6 @@ const App: React.FC = () => {
   const [showMap, setShowMap] = useState<boolean>(false);
   const [selectedLocationId, setSelectedLocationId] = useState<string | undefined>(undefined);
   const [routeLines, setRouteLines] = useState<[number, number][][]>([]);
-  const [panTarget, setPanTarget] = useState<[number, number] | null>(null);
   const [highlightLine, setHighlightLine] = useState<[number, number][] | null>(null);
 
   useEffect(() => {
@@ -184,9 +183,7 @@ const App: React.FC = () => {
   };
 
   const handleHeaderClick = () => {
-    setPanTarget([52.52, 13.405]);
-    setHighlightLine(null);
-    if (!showMap) setShowMap(true);
+    handleSelectLocation('berlin-city');
   };
 
   return (
@@ -211,7 +208,6 @@ const App: React.FC = () => {
               markers={mapLocations}
               lines={routeLines}
               selectedLocationId={selectedLocationId}
-              panTo={panTarget}
               highlightLine={highlightLine}
             />
           </div>
