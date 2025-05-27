@@ -113,6 +113,14 @@ Stay: Hotel Bellavista, Menaggio
 
 Days 10-14 Lake Como (June 23-26, 3 full days)
 Stay in Menaggio at this Airbnb
+Notes:
+• 2-bed / 2-bath lake-view apartment, sleeps 4-6 (Wi-Fi, A/C, laundry)
+• Private balcony overlooking the ferry harbour — 1-min walk to boats & Piazza Garibaldi
+• Fully equipped kitchen (hob, oven, dishwasher, coffee machine, toaster, fridge-freezer)
+• Self check-in from 3 PM; check-out by 10 AM (key safe, code sent 48 h before arrival) *host message, 2025*
+• Registration code 013145-CNI-00184 (Comune di Menaggio short-let licence)
+• Nearest parking: Autosilo Via IV Novembre (covered, €15 / day) — 250 m south of the flat
+• Grocery: Conad City supermarket, Via Caronti 35, 5-min walk
 
 Day 14 go home from Milan (June 26)
 Private Taxi Transfer: Menaggio → Milan Malpensa Airport (MXP)

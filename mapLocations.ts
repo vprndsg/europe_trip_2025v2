@@ -28,6 +28,7 @@ export const mapLocations: MapLocation[] = [
   { id: 'meglisalp', name: 'Meglisalp', position: [47.2559, 9.3856], aliases: ['meglisalp'] },
   { id: 'lugano', name: 'Lugano', position: [46.0055, 8.9469], aliases: ['lugano'] },
   { id: 'menaggio', name: 'Menaggio', position: [46.0170, 9.2330], aliases: ['menaggio'] },
+  { id: 'menaggio-airbnb', name: 'Airbnb – Via IV Novembre 6', position: [46.0167, 9.2333], aliases: ['menaggio airbnb', 'airbnb via iv novembre 6', 'via iv novembre 6', 'this airbnb'] },
   { id: 'malpensa', name: 'Milan Malpensa Airport', position: [45.6300, 8.7231], aliases: ['malpensa'] },
 ];
 
