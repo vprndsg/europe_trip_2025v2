@@ -54,6 +54,9 @@ const fallbackCoords: Record<string, { latitude: number; longitude: number }> = 
 // Manual station coordinates for important trail segments. Allows bypassing
 // the geocoding lookup for these known locations.
 const stationCoords: Record<string, { latitude: number; longitude: number }> = {
+  // Keys should exactly match what the itinerary parser emits
+  'Swiss Alps (Äscher/Ebenalp)': { latitude: 47.283, longitude: 9.433 },
+  'Swiss Alps (Seealpsee/Meglisalp)': { latitude: 47.283, longitude: 9.433 },
   'Berggasthaus Ebenalp': { latitude: 47.283, longitude: 9.433 },
   'Seealpsee': { latitude: 47.283, longitude: 9.433 },
   'Meglisalp': { latitude: 47.283, longitude: 9.433 },
