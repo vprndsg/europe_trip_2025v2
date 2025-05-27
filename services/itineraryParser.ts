@@ -37,6 +37,7 @@ export function parseItinerary(text: string): Itinerary {
   const elevationGainRegex = /^Elevation Gain: (.*)/i;
   const elevationDetailRegex = /^Elevation: (.*)/i; // Combined loss/gain
   const difficultyRegex = /^Difficulty: (.*)/i;
+  const notesStartRegex = /^Notes:$/i;
 
   const trainPlatformRegex = /^Train: Go to Platform\s*(\w+) at (.*?)\.(?:.*?(S\d+ toward .*?)), open seating/i;
   const trainTransferPlatformRegex = /^Train: From your arrival platform.*?Platform\s*(\w+)\. Board.*? (IR .*?|IC \d+ toward .*?), open seating/i;
@@ -141,6 +142,23 @@ export function parseItinerary(text: string): Itinerary {
       }
     };
     
+    if (line.match(notesStartRegex)) {
+      let k = i + 1;
+      while (k < lines.length) {
+        const next = lines[k].trim();
+        if (!next || next.match(dayTitleRegex) || next.match(juneDateTitleRegex) || next.match(departureRegex) ||
+            next.match(arrivalInRegex) || next.match(transferRegex) || next.match(boardTrainRegex) ||
+            next.match(privateTaxiRegex) || next.match(flightDepartureRegex) || next.match(continueToRegex) ||
+            next.match(stayAtRegex) || next.match(overnightRegex) || next.match(routeStartRegex)) {
+          break;
+        }
+        addNoteToContext(next);
+        k++;
+      }
+      i = k - 1;
+      continue;
+    }
+
     const flightArrivalMatch = line.match(flightArrivalRegex);
     if (flightArrivalMatch) {
       event = { type: EventType.TRAVEL, time: flightArrivalMatch[1].trim(), travelSegment: { mode: 'flight', details: `Flight ${flightArrivalMatch[3]}`, operator: flightArrivalMatch[3].split(' ')[0], to: flightArrivalMatch[2]?.trim(), arrivalTime: flightArrivalMatch[1].trim(), notes: [] }};

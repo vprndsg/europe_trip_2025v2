@@ -31,7 +31,6 @@ Arrival in München Hbf: 2:02PM
 Transfer at München Hbf: Depart at 2:54PM
 Notes:
 EC 190 — Wagon 4 — Seats 61/62/63/68 (2 window, 2 aisle, open coach)
-
 Reservation No.: 804880024366
 
 Arrival in St. Gallen (CH): 05:28pm
