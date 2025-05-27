@@ -34,7 +34,11 @@ Reservation No.: 804880024366
 Arrival in St. Gallen (CH): 05:28pm
 
 Continue from St. Gallen to Appenzell
-(local connection, tickets not reserved)
+Departure: St. Gallen HB platform 11/12 at 17:31 (AB S21, direct)
+Arrival: Appenzell at 18:08
+Tickets: buy on SBB Mobile, CHF 11.20 (no seat reservation)
+Notes:
+– Trains every 30 min until 23:26
 
 Stay at Gasthaus Hof, reservation under Eileen for 2 double rooms
 Notes:
