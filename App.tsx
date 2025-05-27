@@ -162,6 +162,7 @@ const App: React.FC = () => {
   const [selectedLocationId, setSelectedLocationId] = useState<string | undefined>(undefined);
   const [routeLines, setRouteLines] = useState<[number, number][][]>([]);
   const [highlightLine, setHighlightLine] = useState<[number, number][] | null>(null);
+  const [panTo, setPanTo] = useState<[number, number] | null>(null);
 
   useEffect(() => {
     try {
@@ -180,6 +181,8 @@ const App: React.FC = () => {
   }, []);
 
   const handleSelectLocation = (id: string) => {
+    const loc = getLocationById(id);
+    if (loc) setPanTo(loc.position);
     setSelectedLocationId(id);
     setHighlightLine(null);
     if (!showMap) setShowMap(true);
@@ -187,6 +190,7 @@ const App: React.FC = () => {
 
   const handleHighlightLine = (line: [number, number][]) => {
     setHighlightLine(line);
+    setPanTo(null);
     if (!showMap) setShowMap(true);
   };
 
@@ -216,6 +220,7 @@ const App: React.FC = () => {
               markers={mapLocations}
               lines={routeLines}
               selectedLocationId={selectedLocationId}
+              panTo={panTo}
               highlightLine={highlightLine}
             />
           </div>

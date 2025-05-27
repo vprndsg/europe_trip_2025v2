@@ -18,7 +18,12 @@ export const mapLocations: MapLocation[] = [
   { id: 'herisau', name: 'Herisau', position: [47.3862, 9.2792], aliases: ['herisau'] },
   { id: 'arth-goldau', name: 'Arth-Goldau', position: [47.0481, 8.5254], aliases: ['arth-goldau', 'arth goldau'] },
   { id: 'aescher', name: 'Berggasthaus Äscher', position: [47.2843, 9.4149], aliases: ['äscher', 'aescher'] },
-  { id: 'ebenalp', name: 'Berggasthaus Ebenalp', position: [47.2867, 9.4286], aliases: ['ebenalp'] },
+  {
+    id: 'ebenalp',
+    name: 'Berggasthaus Ebenalp',
+    position: [47.2867, 9.4286],
+    aliases: ['ebenalp', 'berggasthaus ebenalp']
+  },
   { id: 'seealpsee', name: 'Seealpsee', position: [47.2698, 9.4026], aliases: ['seealpsee'] },
   { id: 'meglisalp', name: 'Meglisalp', position: [47.2559, 9.3856], aliases: ['meglisalp'] },
   { id: 'lugano', name: 'Lugano', position: [46.0055, 8.9469], aliases: ['lugano'] },
