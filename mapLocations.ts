@@ -36,7 +36,7 @@ export const mapLocations: MapLocation[] = [
       'via iv novembre 6',
       'this airbnb'   // extra alias from the feature branch
     ] },
-
+];
 
 export function findLocationId(text?: string): string | undefined {
   if (!text) return undefined;
