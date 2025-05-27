@@ -30,8 +30,16 @@ export const mapLocations: MapLocation[] = [
 export function findLocationId(text?: string): string | undefined {
   if (!text) return undefined;
   const lc = text.toLowerCase();
-  const loc = mapLocations.find(l => [l.name.toLowerCase(), ...(l.aliases || [])].some(a => lc.includes(a)));
-  return loc?.id;
+  let bestMatch: { id: string; len: number } | undefined;
+  for (const loc of mapLocations) {
+    const aliases = [loc.name.toLowerCase(), ...(loc.aliases || []).map(a => a.toLowerCase())];
+    for (const alias of aliases) {
+      if (lc.includes(alias) && alias.length > (bestMatch?.len ?? 0)) {
+        bestMatch = { id: loc.id, len: alias.length };
+      }
+    }
+  }
+  return bestMatch?.id;
 }
 
 export function getLocationById(id: string): MapLocation | undefined {
