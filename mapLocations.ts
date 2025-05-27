@@ -21,7 +21,7 @@ export const mapLocations: MapLocation[] = [
   {
     id: 'ebenalp',
     name: 'Berggasthaus Ebenalp',
-    position: [47.1712, 9.2543],
+    position: [47.283197, 9.411678],
     aliases: ['ebenalp', 'berggasthaus ebenalp']
   },
   { id: 'seealpsee', name: 'Seealpsee', position: [47.2698, 9.4026], aliases: ['seealpsee'] },
