@@ -384,6 +384,8 @@ export function parseItinerary(text: string): Itinerary {
     } else if (line.startsWith("— ") || line.startsWith("(") && line.endsWith(")")) { // Informational notes
         if(currentEventContext) addNoteToContext(line);
         else event = { type: EventType.GENERAL, description: line }; // If no context, make it a general event
+    } else {
+        event = { type: EventType.ACTIVITY, activity: { title: line } };
     }
     
 

@@ -18,6 +18,12 @@ Neckarstraße 21b, 12053 Berlin, Germany
 
 Days 2-5 hang out in berlin (June 15-18, 2 full days)
 
+Beer tasting at Hops & Barley Hausbrauerei
+Beer garden at BRLO Brwhouse
+Currywurst at Konnopke’s Imbiss
+Film supplies at Fotoimpex
+East Side Gallery (Oberbaumbrücke end)
+
 Day 5 travel to Appenzell, stay there (June 18)
 Jenn booking train tickets - leave Berlin 09:40am
 Departure: Berlin Südkreuz at 09:41AM (Jenn booking tickets)
@@ -44,6 +50,10 @@ Notes:
 • Breakfast buffet included (8 AM – 10 AM)
 • Address : Engelgasse 4, 9050 Appenzell | ☎ +41 71 787 22 10
 • Free Wi-Fi · free self-parking · on-site restaurant (hot food all day)
+
+Tasting at Brauerei Locher
+Takeaway Siedwurst at Metzgerei Fässler
+Stroll through Landsgemeinde-platz, Appenzell
 
 June 19: Appenzell → Äscher/Ebenalp
 Route:
@@ -79,6 +89,7 @@ Overnight: Berggasthaus Meglisalp
 Dinner: 5:30pm–7:30pm
 Hot tub: 8:00pm–10:00pm
 620 CHF total for res + hotpot + breakfast (155 CHF/pp) plus extra for dinner
+Morning walk through Meglisalp hamlet
 
 June 21: Meglisalp → Appenzell
 Route:
@@ -110,9 +121,11 @@ Reservation No.: [TBA after booking]
 Arrival: Menaggio, Hotel Bellavista at 03:27pm
 
 Stay: Hotel Bellavista, Menaggio
+Sunset from Hotel Bellavista roof-terrace
 
 Days 10-14 Lake Como (June 23-26, 3 full days)
 Stay in Menaggio at this Airbnb
+Check in at Airbnb – Via IV Novembre 6
 Notes:
 • 2-bed / 2-bath lake-view apartment, sleeps 4-6 (Wi-Fi, A/C, laundry)
 • Private balcony overlooking the ferry harbour — 1-min walk to boats & Piazza Garibaldi
@@ -121,6 +134,13 @@ Notes:
 • Registration code 013145-CNI-00184 (Comune di Menaggio short-let licence)
 • Nearest parking: Autosilo Via IV Novembre (covered, €15 / day) — 250 m south of the flat
 • Grocery: Conad City supermarket, Via Caronti 35, 5-min walk
+
+Craft beer at Divino 13 bar
+Brew visit at Il Birrificio di Como
+Visit Villa Carlotta (Tremezzo)
+Morning taxi-boat to Villa del Balbianello
+Hike up to Castello di Vezio
+Dinner at Osteria il Pozzo
 
 Day 14 go home from Milan (June 26)
 Private Taxi Transfer: Menaggio → Milan Malpensa Airport (MXP)
