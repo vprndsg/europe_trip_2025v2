@@ -20,14 +20,16 @@ Days 2-5 hang out in berlin (June 15-18, 2 full days)
 
 Day 5 travel to Appenzell, stay there (June 18)
 Jenn booking train tickets - leave Berlin 09:40am
-Departure: Berlin Südkreuz at 09:41am (Jenn booking tickets)
-ICE 703, Seats: Wagon 7, Seats 123, 124, 127, 128 (2 window, 2 aisle, table seating, open coach, mobile-friendly)
+Departure: Berlin Südkreuz at 09:41AM (Jenn booking tickets)
+Notes:
+ICE 703 — Wagon 7 — Seats 123/124/127/128 (2 window, 2 aisle, table seating, open coach, mobile-friendly)
 Reservation No.: 804880024364
 
-Arrival in München Hbf: 02:02pm
+Arrival in München Hbf: 2:02PM
 
-Transfer at München Hbf: Depart at 02:54pm
-EC 190, Seats: Wagon 4, Seats 61, 62, 63, 68 (2 window, 2 aisle, open coach)
+Transfer at München Hbf: Depart at 2:54PM
+Notes:
+EC 190 — Wagon 4 — Seats 61/62/63/68 (2 window, 2 aisle, open coach)
 Reservation No.: 804880024366
 
 Arrival in St. Gallen (CH): 05:28pm
