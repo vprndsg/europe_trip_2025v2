@@ -50,20 +50,34 @@ const fallbackCoords: Record<string, { latitude: number; longitude: number }> = 
   'Lake Como, Italy': { latitude: 46.017, longitude: 9.233 } // Menaggio
 };
 
+
+// Manual station coordinates for important trail segments. Allows bypassing
+// the geocoding lookup for these known locations.
+const stationCoords: Record<string, { latitude: number; longitude: number }> = {
+  'Berggasthaus Ebenalp': { latitude: 47.283, longitude: 9.433 },
+  'Seealpsee': { latitude: 47.283, longitude: 9.433 },
+  'Meglisalp': { latitude: 47.283, longitude: 9.433 },
+  'Gasthaus Hof': { latitude: 47.330981, longitude: 9.407536 }, // Appenzell village
+  // Add more fixed points here as needed
+};
 export async function fetchForecast(location: string): Promise<ForecastDay[]> {
   try {
-    // Fetch coordinates for the location
+    // Determine coordinates for the location
     let latitude: number | undefined;
     let longitude: number | undefined;
 
-    const geoRes = await fetch(
-      `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(location)}&count=1&language=en&format=json`
-    );
-    const geoData = await geoRes.json();
-    if (geoData.results && geoData.results.length > 0) {
-      ({ latitude, longitude } = geoData.results[0]);
-    } else if (fallbackCoords[location]) {
-      ({ latitude, longitude } = fallbackCoords[location]);
+    if (stationCoords[location]) {
+      ({ latitude, longitude } = stationCoords[location]);
+    } else {
+      const geoRes = await fetch(
+        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(location)}&count=1&language=en&format=json`
+      );
+      const geoData = await geoRes.json();
+      if (geoData.results && geoData.results.length > 0) {
+        ({ latitude, longitude } = geoData.results[0]);
+      } else if (fallbackCoords[location]) {
+        ({ latitude, longitude } = fallbackCoords[location]);
+      }
     }
 
     if (latitude === undefined || longitude === undefined) {
