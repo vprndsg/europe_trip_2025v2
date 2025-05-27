@@ -56,7 +56,15 @@ Time: 4.5–5 hours
 Elevation Gain: +900 m
 Difficulty: SAC T2 (well-marked mountain path; steep and rocky in upper sections)
 Overnight: Berggasthaus Ebenalp (confirmed)
-80 CHF/person plus extra for dinner
+80 CHF / person plus extra for dinner
+Notes:
+• Check-in from 2 PM – 9 PM | Check-out by 12 PM :contentReference[oaicite:0]{index=0}
+• Altitude 1 644 m (5 394 ft) – panoramic sun-terrace views :contentReference[oaicite:1]{index=1}
+• Beds 17 | Dorm mats 80 | Double-room price CHF 70-90 pp incl. breakfast :contentReference[oaicite:2]{index=2}
+• Breakfast buffet included (7 AM – 9 AM) :contentReference[oaicite:3]{index=3}
+• Free Wi-Fi (limited), on-site restaurant, non-smoking interior :contentReference[oaicite:4]{index=4}
+• Family Kölbener – Phone +41 71 799 11 94 – gasthaus-ebenalp.ch :contentReference[oaicite:5]{index=5}
+• Reachable via Ebenalp cable car from Wasserauen (last descent ~6 PM) or 40-min hike
 
 June 20: Ebenalp → Seealpsee → Meglisalp
 Route:
