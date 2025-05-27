@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CrosshairsIcon, InformationCircleIcon } from './IconComponents';
 import { MapLocation } from '../mapLocations';
+import { createGoogleMapsSearchLink } from '../utils';
 
 // Declare L globally for Leaflet
 declare var L: any;
@@ -90,7 +91,10 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ markers = [], lines = [
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
         shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png'
-      })}).addTo(map).bindPopup(`<strong>${loc.name}</strong>${loc.notes ? '<br/>'+loc.notes : ''}`);
+      })}).addTo(map);
+      const mapsUrl = createGoogleMapsSearchLink(`${loc.position[0]},${loc.position[1]}`);
+      const popupContent = `<strong>${loc.name}</strong>${loc.notes ? '<br/>' + loc.notes : ''}<br/><a href="${mapsUrl}" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>`;
+      marker.bindPopup(popupContent);
       markerMapRef.current[loc.id] = marker;
     });
 
