@@ -29,7 +29,7 @@ export const mapLocations: MapLocation[] = [
   { id: 'lugano', name: 'Lugano', position: [46.0055, 8.9469], aliases: ['lugano'] },
     { id: 'menaggio-airbnb',
     name: 'Airbnb – Via IV Novembre 6',
-    position: [46.0167, 9.2333],
+    position: [46.019874, 9.237891],
     aliases: [
       'menaggio airbnb',
       'airbnb via iv novembre 6',
