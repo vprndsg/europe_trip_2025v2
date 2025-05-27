@@ -1,0 +1,14 @@
+[
+  {
+    "id": "berlin-city",
+    "name": "Berlin City Centre",
+    "lat": 52.5200,
+    "lng": 13.4050
+  },
+  {
+    "id": "neckarstrasse-21b",
+    "name": "Neckarstraße 21b",
+    "lat": 52.4760,
+    "lng": 13.4320
+  }
+]
