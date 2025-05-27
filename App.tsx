@@ -11,26 +11,26 @@ import { LoadingSpinnerIcon, MapIcon, EyeIcon, EyeSlashIcon } from './components
 
 const rawItineraryData = `
 Day 1-2 fly to Berlin (June 14-15)
-Arrive 6pm to BER on UA 8715 (prior flight is UA 926 to FRA)
+Arrive 6:00pm to BER on UA 8715 (prior flight is UA 926 to FRA)
 Uber from BER T1-2 to Neckarstraße 21b, 12053 Berlin
-ETA at Jenn’s house: ~19:05
+ETA at Jenn’s house: ~7:05pm
 Neckarstraße 21b, 12053 Berlin, Germany
 
 Days 2-5 hang out in berlin (June 15-18, 2 full days)
 
 Day 5 travel to Appenzell, stay there (June 18)
-Jenn booking train tickets - leave Berlin 9:40am
-Departure: Berlin Südkreuz at 09:41 (Jenn booking tickets)
+Jenn booking train tickets - leave Berlin 09:40am
+Departure: Berlin Südkreuz at 09:41am (Jenn booking tickets)
 ICE 703, Seats: Wagon 7, Seats 123, 124, 127, 128 (2 window, 2 aisle, table seating, open coach, mobile-friendly)
 Reservation No.: 804880024364
 
-Arrival in München Hbf: 14:02
+Arrival in München Hbf: 02:02pm
 
-Transfer at München Hbf: Depart at 14:54
+Transfer at München Hbf: Depart at 02:54pm
 EC 190, Seats: Wagon 4, Seats 61, 62, 63, 68 (2 window, 2 aisle, open coach)
 Reservation No.: 804880024366
 
-Arrival in St. Gallen (CH): 17:28
+Arrival in St. Gallen (CH): 05:28pm
 
 Continue from St. Gallen to Appenzell
 (local connection, tickets not reserved)
@@ -61,8 +61,8 @@ Elevation: -500 m descent, +400 m ascent
 Difficulty: SAC T2 (steep descent, steady ascent)
 Overnight: Berggasthaus Meglisalp
 2 double rooms (bring cash)
-Dinner: 5:30–7:30 pm
-Hot tub: 8:00–10:00 pm
+Dinner: 5:30pm–7:30pm
+Hot tub: 8:00pm–10:00pm
 620 CHF total for res + hotpot + breakfast (155 CHF/pp) plus extra for dinner
 
 June 21: Meglisalp → Appenzell
@@ -77,22 +77,22 @@ Overnight: Gasthaus Hof, Appenzell
 Reservation under Eileen (quad room)
 
 Day 9 transit to Italy (June 22)
-Departure: Appenzell at 10:30.
+Departure: Appenzell at 10:30am.
 Train: Go to Platform 3A at Appenzell Bahnhof. Look for the blue‑white sign S23 Gossau SG. S23 toward Gossau SG, open seating (local commuter train)
-Arrival: Herisau at 11:00
+Arrival: Herisau at 11:00am
 
-Transfer: Herisau, depart at 11:13
+Transfer: Herisau, depart at 11:13am
 Train: From your arrival platform take the stairs under the tracks to Platform 1. Board the red‑white train marked IR Voralpen‑Express → Luzern. IR Voralpen-Express toward Luzern, open seating (café trolley available)
-Arrival: Arth-Goldau at 12:45
+Arrival: Arth-Goldau at 12:45pm
 
-Transfer: Arth-Goldau, depart at 12:49
+Transfer: Arth-Goldau, depart at 12:49pm
 Train: Quick three‑minute change: use the underground passage to Platform 5 for IC 21 → Lugano. IC 21 toward Lugano, open seating (optional seat reservation, dining car available)
-Arrival: Lugano at 14:02
+Arrival: Lugano at 02:02pm
 
-Transfer: Lugano (walk 5 min to Lugano Stazione Nord, Stop D), depart at 14:40
+Transfer: Lugano (walk 5 min to Lugano Stazione Nord, Stop D), depart at 02:40pm
 Bus: Exit the train, follow yellow “Bus” pictograms to the station forecourt, then right for “Stazione Nord” bus stands. Stand at Stop D. Panorama-express BP 631 toward St. Moritz Bahnhof (mandatory free seat reservation via SBB Mobile, seat number issued upon booking)
 Reservation No.: [TBA after booking]
-Arrival: Menaggio, Hotel Bellavista at 15:27
+Arrival: Menaggio, Hotel Bellavista at 03:27pm
 
 Stay: Hotel Bellavista, Menaggio
 
