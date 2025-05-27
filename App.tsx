@@ -25,9 +25,7 @@ Departure: Berlin Südkreuz at 09:41AM (Jenn booking tickets)
 Notes:
 ICE 703 — Wagon 7 — Seats 123/124/127/128 (2 window, 2 aisle, table seating, open coach, mobile-friendly)
 Reservation No.: 804880024364
-
 Arrival in München Hbf: 2:02PM
-
 Transfer at München Hbf: Depart at 2:54PM
 Notes:
 EC 190 — Wagon 4 — Seats 61/62/63/68 (2 window, 2 aisle, open coach)
@@ -38,12 +36,12 @@ Arrival in St. Gallen (CH): 05:28pm
 Continue from St. Gallen to Appenzell
 (local connection, tickets not reserved)
 
-+Stay at Gasthaus Hof, reservation under Eileen for 2 double rooms
-+Notes:
-+• Check-in 3 PM – 9 PM | Check-out by 10 AM
-+• Breakfast buffet included (8 AM – 10 AM)
-+• Address : Engelgasse 4, 9050 Appenzell | ☎ +41 71 787 22 10
-+• Free Wi-Fi · free self-parking · on-site restaurant (hot food all day)
+Stay at Gasthaus Hof, reservation under Eileen for 2 double rooms
+Notes:
+• Check-in 3 PM – 9 PM | Check-out by 10 AM
+• Breakfast buffet included (8 AM – 10 AM)
+• Address : Engelgasse 4, 9050 Appenzell | ☎ +41 71 787 22 10
+• Free Wi-Fi · free self-parking · on-site restaurant (hot food all day)
 
 June 19: Appenzell → Äscher/Ebenalp
 Route:
