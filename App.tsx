@@ -229,15 +229,17 @@ const App: React.FC = () => {
       <Header title={itinerary?.title || "Trip Itinerary"} onClick={handleHeaderClick} />
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="mb-6 flex justify-end">
-          <button
-            onClick={() => setShowMap(!showMap)}
-            className="flex items-center bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-150 ease-in-out"
-            aria-live="polite"
-            aria-pressed={showMap}
-          >
-            {showMap ? <EyeSlashIcon className="w-5 h-5 mr-2" /> : <EyeIcon className="w-5 h-5 mr-2" />}
-            {showMap ? 'Hide Live Map' : 'Show Live Map'}
-          </button>
+          {!showMap && (
+            <button
+              onClick={() => setShowMap(true)}
+              className="flex items-center bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-150 ease-in-out"
+              aria-live="polite"
+              aria-pressed={showMap}
+            >
+              <EyeIcon className="w-5 h-5 mr-2" />
+              Show Live Map
+            </button>
+          )}
         </div>
 
         {showMap && (
@@ -249,6 +251,20 @@ const App: React.FC = () => {
               panTo={panTo}
               highlightLine={highlightLine}
             />
+          </div>
+        )}
+
+        {showMap && (
+          <div className="mb-6 flex justify-end">
+            <button
+              onClick={() => setShowMap(false)}
+              className="flex items-center bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-150 ease-in-out"
+              aria-live="polite"
+              aria-pressed={showMap}
+            >
+              <EyeSlashIcon className="w-5 h-5 mr-2" />
+              Hide Live Map
+            </button>
           </div>
         )}
 
