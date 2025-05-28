@@ -251,6 +251,17 @@ const App: React.FC = () => {
               panTo={panTo}
               highlightLine={highlightLine}
             />
+            <div className="mt-4 flex justify-end">
+              <button
+                onClick={() => setShowMap(false)}
+                className="flex items-center bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-150 ease-in-out"
+                aria-live="polite"
+                aria-pressed={showMap}
+              >
+                <EyeSlashIcon className="w-5 h-5 mr-2" />
+                Hide Live Map
+              </button>
+            </div>
           </div>
         )}
 
