@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { CrosshairsIcon, InformationCircleIcon } from './IconComponents';
-import { MapLocation } from '../mapLocations';
+import { MapLocation } from '../src/mapLocations';
 import { createGoogleMapsSearchLink } from '../utils';
 
 // Declare L globally for Leaflet

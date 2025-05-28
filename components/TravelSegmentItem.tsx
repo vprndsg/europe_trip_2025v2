@@ -2,7 +2,7 @@ import React from 'react';
 import { TravelSegment } from '../types';
 import { FlightIcon, TrainIcon, BusIcon, WalkIcon, CarIcon, ClockIcon, InformationCircleIcon, TicketIcon, BuildingLibraryIcon, MapPinIcon } from './IconComponents';
 import { createGoogleMapsSearchLink } from '../utils';
-import { findLocationId, getLocationById } from '../mapLocations';
+import { findLocationId, getLocationById } from '../src/mapLocations';
 
 interface TravelSegmentItemProps {
   segment: TravelSegment;

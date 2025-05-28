@@ -1,7 +1,7 @@
 import React from 'react';
 import { InformationCircleIcon, ClockIcon } from './IconComponents';
 import { createGoogleMapsSearchLink } from '../utils';
-import { findLocationId } from '../mapLocations';
+import { findLocationId } from '../src/mapLocations';
 
 interface GeneralEventItemProps {
   description: string;

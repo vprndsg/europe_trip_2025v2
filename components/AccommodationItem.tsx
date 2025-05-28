@@ -2,7 +2,7 @@ import React from 'react';
 import { Accommodation } from '../types';
 import { BedIcon, ClockIcon, MapPinIcon, MapPinIconAlt, InformationCircleIcon } from './IconComponents';
 import { createGoogleMapsSearchLink } from '../utils';
-import { findLocationId } from '../mapLocations';
+import { findLocationId } from '../src/mapLocations';
 
 interface AccommodationItemProps {
   accommodation: Accommodation;
