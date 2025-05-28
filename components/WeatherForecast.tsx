@@ -45,6 +45,7 @@ const WeatherForecast: React.FC<WeatherForecastProps> = ({ location }) => {
             <p className="font-semibold">{day.date}</p>
             <p>{day.conditions}</p>
             <p className="text-xs">{day.high} / {day.low}</p>
+            <p className="text-xs">Sunrise {day.sunrise} | Sunset {day.sunset}</p>
           </div>
         ))}
       </div>

@@ -3,6 +3,8 @@ export interface ForecastDay {
   conditions: string;
   high: string;
   low: string;
+  sunrise: string;
+  sunset: string;
 }
 
 // Local fallback data used when network requests fail
@@ -95,7 +97,7 @@ export async function fetchForecast(location: string): Promise<ForecastDay[]> {
       .split('T')[0];
 
     const weatherRes = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto&temperature_unit=fahrenheit&start_date=${startDate}&end_date=${endDate}`
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=auto&temperature_unit=fahrenheit&start_date=${startDate}&end_date=${endDate}`
     );
     const weatherData = await weatherRes.json();
     const daily = weatherData.daily;
@@ -109,11 +111,21 @@ export async function fetchForecast(location: string): Promise<ForecastDay[]> {
         month: 'short',
         day: 'numeric'
       });
+      const sunriseStr = new Date(daily.sunrise[i]).toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit'
+      });
+      const sunsetStr = new Date(daily.sunset[i]).toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit'
+      });
       days.push({
         date: dateStr,
         conditions: describeWeather(daily.weathercode[i]),
         high: `${Math.round(daily.temperature_2m_max[i])}°F`,
-        low: `${Math.round(daily.temperature_2m_min[i])}°F`
+        low: `${Math.round(daily.temperature_2m_min[i])}°F`,
+        sunrise: sunriseStr,
+        sunset: sunsetStr
       });
     }
     return days;
