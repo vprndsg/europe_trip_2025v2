@@ -3,7 +3,7 @@ import { Activity } from '../types';
 import { HikeIcon, SparklesIcon, ClockIcon, ArrowUpTrayIcon, ArrowDownTrayIcon, AdjustmentsHorizontalIcon, InformationCircleIcon, MapPinIcon } from './IconComponents';
 import { createGoogleMapsSearchLink } from '../utils';
 
-import { findLocationId } from '../mapLocations';
+import { findLocationId } from '../src/mapLocations';
 
 interface ActivityItemProps {
   activity: Activity;

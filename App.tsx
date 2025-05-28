@@ -6,7 +6,7 @@ import ItineraryDayCard from './components/ItineraryDayCard';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import InteractiveMap from './components/InteractiveMap';
-import { mapLocations, findLocationId, getLocationById } from './mapLocations';
+import { mapLocations, findLocationId, getLocationById } from './src/mapLocations';
 import { LoadingSpinnerIcon, MapIcon, EyeIcon, EyeSlashIcon } from './components/IconComponents';
 
 const rawItineraryData = `
