@@ -13,6 +13,7 @@ export const mapLocations: MapLocation[] = [
   { id: 'berlin-sudkreuz', name: 'Berlin Südkreuz', position: [52.4753, 13.3658], aliases: ['südkreuz', 'berlin südkreuz', 'suedkreuz'] },
   { id: 'tempelhofer-feld', name: 'Tempelhofer Feld', position: [52.476, 13.395], aliases: ['tempelhofer feld'] },
   { id: 'richardplatz', name: 'Richardplatz', position: [52.47417, 13.44582], aliases: ['richardplatz'] },
+  { id: 'foto-braune', name: 'Foto Braune', position: [52.48629, 13.42455], aliases: ['foto braune'] },
   { id: 'appenzell', name: 'Appenzell', position: [47.3308, 9.4088], aliases: ['appenzell'] },
   { id: 'gasthaus-hof', name: 'Gasthaus Hof', position: [47.330981, 9.407536], aliases: ['gasthaus hof', 'gasthof-hotel hof', 'gasthof-hotel hof ag'] },
   { id: 'munich-hbf', name: 'München Hbf', position: [48.1402, 11.5585], aliases: ['munich hbf', 'münchen hbf', 'munchen hbf'] },
